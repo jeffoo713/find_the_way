@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
 const dotenv = require('dotenv').config({ path: './.env' });
 
@@ -7,7 +8,7 @@ const prod = process.env.NODE_ENV === 'production';
 
 module.exports = {
   mode: prod ? 'production' : 'development',
-  devtool: prod ? undefined : 'inline-source-map',
+  devtool: prod ? 'source-map' : 'eval-source-map',
   entry: './src/index.tsx',
   output: {
     filename: 'bundle.js',
@@ -33,16 +34,10 @@ module.exports = {
         use: ['ts-loader'],
       },
       {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.(png|jpe?g|gif)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-          },
-        ],
+        test: /\.(css|scss)$/,
+        use: prod
+          ? [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+          : ['style-loader', 'css-loader', 'sass-loader'],
       },
     ],
   },
@@ -56,5 +51,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src', 'index.html'),
     }),
+    prod && new MiniCssExtractPlugin(),
   ],
 };
