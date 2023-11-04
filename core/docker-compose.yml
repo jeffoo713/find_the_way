@@ -1,0 +1,12 @@
+version: "3.8"
+
+# command to run: 
+# docker-compose -p find_the_way up -d
+
+services:
+  client:
+    extends:
+      file: services/client.yml
+      service: client
+    env_file:
+      - ./common.env

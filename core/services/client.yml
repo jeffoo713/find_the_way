@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  client:
+    build: ../../client
+    command: ["npm", "start"]
+    volumes:
+      - ../../client:/app
+      - /app/node_modules # tell Docker to use the node_modules directory that was created inside the container and not replace it with any host directory
+    ports:
+      - "3333:3333"
