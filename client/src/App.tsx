@@ -10,6 +10,7 @@ const getStartCellNumber = (numOfCellsInRow: number) => Math.floor(Math.random()
 
 const createBoard = (board: BoardType) => {
   const boardToStart: BoardType = [];
+  const sequence: number[] = [];
 
   let prevLastCellIndex: number;
   let prevTurnLeft: boolean | null;
@@ -22,6 +23,7 @@ const createBoard = (board: BoardType) => {
 
     const plainRow: BoardRowType = new Array<0 | 1>(WITH_SIZE).fill(0);
     plainRow[prevLastCellIndex] = 1;
+    sequence.push(WITH_SIZE * i + prevLastCellIndex);
 
     const shouldTurnLeft =
       (prevLastCellIndex !== 0 && prevTurnLeft !== false && Math.random() > 0.4) ||
@@ -33,6 +35,7 @@ const createBoard = (board: BoardType) => {
       prevTurnLeft = null;
       return;
     }
+
     const totalTurnSteps = Math.floor(Math.random() * 3) + 1; // 1 | 2 | 3
     console.log('row:', i, 'should turn left? ', shouldTurnLeft, 'totalTurnSteps ', totalTurnSteps);
 
@@ -41,6 +44,7 @@ const createBoard = (board: BoardType) => {
       for (let j = 1; j < totalTurnSteps + 1; j += 1) {
         if (prevLastCellIndex - j >= 0) {
           plainRow[prevLastCellIndex - j] = 1;
+          sequence.push(WITH_SIZE * i + prevLastCellIndex - j);
         }
       }
       prevLastCellIndex = Math.max(prevLastCellIndex - totalTurnSteps, 0);
@@ -49,6 +53,7 @@ const createBoard = (board: BoardType) => {
       for (let j = 1; j < totalTurnSteps + 1; j += 1) {
         if (prevLastCellIndex + j <= WITH_SIZE - 1) {
           plainRow[prevLastCellIndex + j] = 1;
+          sequence.push(WITH_SIZE * i + prevLastCellIndex + j);
         }
       }
       prevLastCellIndex = Math.min(prevLastCellIndex + totalTurnSteps, WITH_SIZE - 1);
@@ -60,11 +65,13 @@ const createBoard = (board: BoardType) => {
   });
 
   console.log('board created: ', boardToStart);
-  return boardToStart;
+  console.log('sequence: ', sequence);
+  return [boardToStart, sequence];
 };
 
 function App() {
-  const boardToStart = createBoard(emptyBoard);
+  const [boardToStart, sequence] = createBoard(emptyBoard);
+
   return (
     <div className='app'>
       <h1>START FIND THE WAY!</h1>
