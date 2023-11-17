@@ -1,3 +1,3 @@
-type BoardRowType = Array<0 | 1>;
+type BoardRow = Array<0 | 1>;
 
-type BoardType = Array<BoardRowType>;
+type Board = Array<BoardRow>;

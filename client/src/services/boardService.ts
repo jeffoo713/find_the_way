@@ -10,8 +10,8 @@ class BoardService {
   }
 
   private getEmptyBoard() {
-    const boardRow: BoardRowType = new Array<0 | 1>(this.widthSize).fill(0);
-    const emptyBoard = new Array<BoardRowType>(this.widthSize).fill(boardRow);
+    const boardRow: BoardRow = new Array<0 | 1>(this.widthSize).fill(0);
+    const emptyBoard = new Array<BoardRow>(this.widthSize).fill(boardRow);
 
     return emptyBoard;
   }
@@ -34,7 +34,7 @@ class BoardService {
     isTurningLeft: boolean,
     totalTurnSteps: number,
     prevLastCellIndex: number,
-    plainRow: BoardRowType,
+    plainRow: BoardRow,
     sequence: number[],
     rowIndex: number,
   ) {
@@ -52,10 +52,10 @@ class BoardService {
     }
   }
 
-  createBoard(): [BoardType, number[]] {
+  createBoard(): [Board, number[]] {
     const emptyBoard = this.getEmptyBoard();
 
-    const boardToStart: BoardType = [];
+    const boardToStart: Board = [];
     const sequence: number[] = [];
 
     let prevLastCellIndex: number;

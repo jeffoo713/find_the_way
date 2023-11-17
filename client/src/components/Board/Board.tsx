@@ -1,23 +1,16 @@
+import { useMemo } from 'react';
 import BoardService from '../../services/boardService';
+import Cell from '../Cell/Cell';
 import './board.style.scss';
 
-function Board() {
-  const boardService = new BoardService(8);
-
-  const [boardToStart, sequence] = boardService.createBoard();
+function Board({ widthSize, showWay }: BoardComp) {
+  const boardService = useMemo(() => new BoardService(widthSize), [widthSize]);
+  const [board, sequence] = useMemo(() => boardService.createBoard(), [boardService]);
 
   return (
     <div className='board'>
-      {boardToStart.flat(1).map((cell, idx) => (
-        <div
-          key={`cell-${idx}`}
-          style={{
-            aspectRatio: '1/1',
-            border: '1px solid black',
-            margin: '.2rem',
-            backgroundColor: `${!!cell && 'green'}`,
-          }}
-        ></div>
+      {board.flat(1).map((cell, idx) => (
+        <Cell key={`cell-${idx}`} filled={Boolean(cell)} showWay={showWay} />
       ))}
     </div>
   );
