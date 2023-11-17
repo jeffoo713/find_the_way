@@ -3,12 +3,14 @@ import BoardService from '../../services/boardService';
 import Cell from '../Cell/Cell';
 import './board.style.scss';
 
-function Board({ widthSize, showWay }: BoardComp) {
-  const boardService = useMemo(() => new BoardService(widthSize), [widthSize]);
+function Board({ showWay }: BoardComp) {
+  const widthSize = 5;
+
+  const boardService = useMemo(() => new BoardService(widthSize), []);
   const [board, sequence] = useMemo(() => boardService.createBoard(), [boardService]);
 
   return (
-    <div className='board'>
+    <div className='board' style={{ gridTemplateColumns: `repeat(${widthSize}, 1fr)` }}>
       {board.flat(1).map((cell, idx) => (
         <Cell key={`cell-${idx}`} filled={Boolean(cell)} showWay={showWay} />
       ))}

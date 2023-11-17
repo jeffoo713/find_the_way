@@ -8,7 +8,7 @@ function App() {
   return (
     <div className='app'>
       <h1 onClick={() => setShowWay(prev => !prev)}>FIND THE WAY!</h1>
-      <Board showWay={showWay} widthSize={8} />
+      <Board showWay={showWay} />
     </div>
   );
 }
