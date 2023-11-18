@@ -109,7 +109,6 @@ class BoardService {
       return;
     });
 
-    console.log('board created: ', boardToStart);
     console.log('sequence: ', sequence);
 
     // if (sequence.length < 15) return this.createBoard();
