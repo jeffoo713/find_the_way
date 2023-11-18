@@ -1,35 +1,23 @@
-import { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
-import BoardService from '../../services/boardService';
 import Cell from '../Cell/Cell';
 import './board.style.scss';
+import { useBoard } from '../hooks/useBoard';
 
 function Board() {
   const widthSize = 6;
 
-  const [restartCount, restartBoard] = useReducer(x => x + 1, 0);
-  const boardService = useMemo(() => new BoardService(widthSize), []);
-  const [board, sequence] = useMemo(() => boardService.createBoard(), [boardService, restartCount]);
-  const [showWay, setShowWay] = useState<boolean>(true);
-  const [attemptCount, setAttemptCount] = useState<number>(1);
-  const [guessSequence, setGuessSequence] = useState<number[]>([]);
-  const [success, setSuccess] = useState<boolean>(false);
-
-  const initialShowWay = useCallback((cell: number) => Boolean(cell) && showWay, [showWay]);
-
-  useEffect(() => {
-    setShowWay(true);
-    setSuccess(false);
-    setGuessSequence([]);
-    setAttemptCount(1);
-
-    const timer = setTimeout(() => {
-      setShowWay(false);
-    }, 2000);
-
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [restartCount]);
+  const {
+    board,
+    sequence,
+    showWay,
+    initialShowWay,
+    attemptCount,
+    setAttemptCount,
+    guessSequence,
+    setGuessSequence,
+    success,
+    setSuccess,
+    restartBoard,
+  } = useBoard(widthSize);
 
   const handelClickCell = (idx: number) => {
     if (
@@ -67,8 +55,8 @@ function Board() {
 
   return (
     <div>
-      <p>{`Attempts: ${attemptCount}`}</p>
-      <p onClick={() => restartBoard()}>Restart</p>
+      <p>{`Attempt(s): ${attemptCount}`}</p>
+      <p onClick={() => restartBoard()}>RESTART</p>
       <div className='board' style={{ gridTemplateColumns: `repeat(${widthSize}, 1fr)` }}>
         {board.flat(1).map((cell, idx) => (
           <Cell
