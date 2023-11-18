@@ -5,53 +5,8 @@ import { useBoard } from '../hooks/useBoard';
 function Board() {
   const widthSize = 6;
 
-  const {
-    board,
-    sequence,
-    showWay,
-    initialShowWay,
-    attemptCount,
-    setAttemptCount,
-    guessSequence,
-    setGuessSequence,
-    success,
-    setSuccess,
-    restartBoard,
-  } = useBoard(widthSize);
-
-  const handelClickCell = (idx: number) => {
-    if (
-      showWay ||
-      success ||
-      guessSequence.includes(idx) ||
-      (guessSequence.length === 0 && idx >= widthSize)
-    )
-      return;
-
-    const numOfFoundCells = guessSequence.length;
-    const nextCellIdx = sequence.at(numOfFoundCells);
-
-    if (nextCellIdx === idx) {
-      setGuessSequence(prev => {
-        const updated = [...prev, idx];
-
-        if (updated.length === sequence.length) {
-          setSuccess(true);
-          console.log('YOU FOUND THE WAY!!');
-        }
-
-        return [...prev, idx];
-      });
-    } else {
-      setGuessSequence([]);
-      setAttemptCount(prev => ++prev);
-      console.log('WRONG WAY!!');
-    }
-  };
-
-  const isCellCorrect = (idx: number) => {
-    return guessSequence.includes(idx);
-  };
+  const { board, initialShowWay, attemptCount, restartBoard, handelClickCell, isCellCorrect } =
+    useBoard(widthSize);
 
   return (
     <div>

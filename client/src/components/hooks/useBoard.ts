@@ -30,17 +30,40 @@ export const useBoard = (widthSize: number) => {
     };
   }, [restartCount]);
 
-  return {
-    board,
-    sequence,
-    showWay,
-    initialShowWay,
-    attemptCount,
-    setAttemptCount,
-    guessSequence,
-    setGuessSequence,
-    success,
-    setSuccess,
-    restartBoard,
+  const shouldIgnoreClick = (idx: number) =>
+    showWay ||
+    success ||
+    guessSequence.includes(idx) ||
+    (guessSequence.length === 0 && idx >= widthSize);
+
+  const handelClickCell = (idx: number) => {
+    if (shouldIgnoreClick(idx)) return;
+
+    const numOfFoundCells = guessSequence.length;
+    const nextCellIdx = sequence.at(numOfFoundCells);
+    const correctGuess = nextCellIdx === idx;
+
+    if (correctGuess) {
+      setGuessSequence(prev => {
+        const updated = [...prev, idx];
+
+        if (updated.length === sequence.length) {
+          setSuccess(true);
+          console.log('YOU FOUND THE WAY!!');
+        }
+
+        return updated;
+      });
+    } else {
+      setGuessSequence([]);
+      setAttemptCount(prev => ++prev);
+      console.log('WRONG WAY!!');
+    }
   };
+
+  const isCellCorrect = (idx: number) => {
+    return guessSequence.includes(idx);
+  };
+
+  return { board, initialShowWay, attemptCount, restartBoard, handelClickCell, isCellCorrect };
 };
