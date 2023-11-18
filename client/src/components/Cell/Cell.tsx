@@ -1,12 +1,13 @@
 import './cell.style.scss';
 
-function Cell({ filled, showWay }: CellComp) {
+function Cell({ cellIndex, shouldLightUp, onClick }: CellComp) {
   return (
     <div
       className='cell'
       style={{
-        backgroundColor: `${showWay && filled ? 'green' : 'unset'}`,
+        backgroundColor: `${shouldLightUp ? 'green' : 'unset'}`,
       }}
+      onClick={() => onClick(cellIndex)}
     />
   );
 }

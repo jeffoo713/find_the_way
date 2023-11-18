@@ -1,4 +1,5 @@
 type CellComp = {
-  filled: boolean;
-  showWay: boolean;
-}
+  cellIndex: number;
+  shouldLightUp: boolean;
+  onClick: (idx: number) => void;
+};

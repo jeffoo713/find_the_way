@@ -1,3 +1,1 @@
-type BoardComp = {
-  showWay: boolean;
-};
+// type BoardComp = {};
