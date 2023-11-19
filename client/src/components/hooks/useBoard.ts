@@ -9,6 +9,7 @@ export const useBoard = (widthSize: number) => {
   const [board, sequence] = useMemo(() => boardService.createBoard(), [boardService, restartCount]);
 
   const [showWay, setShowWay] = useState<boolean>(true);
+  const [remainingShowWayCount, setRemainingShowWayCount] = useState<number>(2);
   const [attemptCount, setAttemptCount] = useState<number>(1);
   const [guessSequence, setGuessSequence] = useState<number[]>([]);
   const [success, setSuccess] = useState<boolean>(false);
@@ -20,6 +21,7 @@ export const useBoard = (widthSize: number) => {
     setSuccess(false);
     setGuessSequence([]);
     setAttemptCount(1);
+    setRemainingShowWayCount(2);
 
     const timer = setTimeout(() => {
       setShowWay(false);
@@ -65,5 +67,24 @@ export const useBoard = (widthSize: number) => {
     return guessSequence.includes(idx);
   };
 
-  return { board, initialShowWay, attemptCount, restartBoard, handelClickCell, isCellCorrect };
+  const temporaryShowWay = () => {
+    if (showWay || remainingShowWayCount === 0) return;
+
+    setShowWay(true);
+    setRemainingShowWayCount(prev => --prev);
+    setTimeout(() => {
+      setShowWay(false);
+    }, 700);
+  };
+
+  return {
+    board,
+    initialShowWay,
+    temporaryShowWay,
+    remainingShowWayCount,
+    attemptCount,
+    restartBoard,
+    handelClickCell,
+    isCellCorrect,
+  };
 };
