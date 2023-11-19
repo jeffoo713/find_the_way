@@ -1,6 +1,7 @@
 import Cell from '../Cell/Cell';
 import './board.style.scss';
 import { useBoard } from '../hooks/useBoard';
+import BoardTopBar from '../BoardTopBar/BoardTopBar';
 
 function Board() {
   const widthSize = 6;
@@ -14,17 +15,18 @@ function Board() {
     restartBoard,
     handelClickCell,
     isCellCorrect,
+    success,
   } = useBoard(widthSize);
 
   return (
     <div>
-      <p>{`Attempt(s): ${attemptCount}`}</p>
-      <div>
-        <span onClick={() => temporaryShowWay()}>{`Show way: ${remainingShowWayCount} left`}</span>
-      </div>
-      <div>
-        <span onClick={() => restartBoard()}>RESTART</span>
-      </div>
+      <BoardTopBar
+        attemptCount={attemptCount}
+        remainingShowWayCount={remainingShowWayCount}
+        temporaryShowWay={temporaryShowWay}
+        restartBoard={restartBoard}
+        success={success}
+      />
       <div className='board' style={{ gridTemplateColumns: `repeat(${widthSize}, 1fr)` }}>
         {board.flat(1).map((cell, idx) => (
           <Cell

@@ -25,21 +25,21 @@ export const useBoard = (widthSize: number) => {
 
     const timer = setTimeout(() => {
       setShowWay(false);
-    }, 2000);
+    }, 1000);
 
     return () => {
       clearTimeout(timer);
     };
   }, [restartCount]);
 
-  const shouldIgnoreClick = (idx: number) =>
+  const shouldIgnoreCellClick = (idx: number) =>
     showWay ||
     success ||
     guessSequence.includes(idx) ||
     (guessSequence.length === 0 && idx >= widthSize);
 
   const handelClickCell = (idx: number) => {
-    if (shouldIgnoreClick(idx)) return;
+    if (shouldIgnoreCellClick(idx)) return;
 
     const numOfFoundCells = guessSequence.length;
     const nextCellIdx = sequence.at(numOfFoundCells);
@@ -68,7 +68,7 @@ export const useBoard = (widthSize: number) => {
   };
 
   const temporaryShowWay = () => {
-    if (showWay || remainingShowWayCount === 0) return;
+    if (showWay || remainingShowWayCount === 0 || success) return;
 
     setShowWay(true);
     setRemainingShowWayCount(prev => --prev);
@@ -86,5 +86,6 @@ export const useBoard = (widthSize: number) => {
     restartBoard,
     handelClickCell,
     isCellCorrect,
+    success,
   };
 };
