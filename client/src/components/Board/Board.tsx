@@ -8,7 +8,6 @@ function Board() {
 
   const {
     board,
-    initialShowWay,
     temporaryShowWay,
     remainingShowWayCount,
     attemptCount,
