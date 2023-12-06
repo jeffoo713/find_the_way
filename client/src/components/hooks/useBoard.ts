@@ -18,25 +18,27 @@ export const useBoard = (widthSize: number) => {
   const [guessSequence, setGuessSequence] = useState<number[]>([]);
   const [success, setSuccess] = useState<boolean>(false);
 
-  const [cellIndexTolightUp, setCellIndexTolightUp] = useState<number | null>(null);
+  const [cellIndexTolightUp, setCellIndexTolightUp] = useState<number>(-1);
 
   useEffect(() => {
     setDisplayingWay(true);
 
     sequence.forEach((cellIdx, i) => {
+      if (guessSequence.includes(cellIdx)) return;
+
       setTimeout(() => {
         setCellIndexTolightUp(cellIdx);
-      }, 500 * i);
+      }, 500 * (i - guessSequence.length));
     });
 
     setTimeout(() => {
-      setCellIndexTolightUp(null);
+      setCellIndexTolightUp(-1);
       setDisplayingWay(false);
-    }, 500 * sequence.length);
-  }, [sequence]);
+    }, 500 * (sequence.length - guessSequence.length));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sequence, remainingShowWayCount]);
 
   useEffect(() => {
-    // setShowWay(true);
     setSuccess(false);
     setGuessSequence([]);
     setAttemptCount(1);
