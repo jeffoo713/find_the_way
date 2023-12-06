@@ -16,6 +16,8 @@ function Board() {
     handelClickCell,
     isCellCorrect,
     success,
+    cellIndexTolightUp,
+    displayingWay,
   } = useBoard(widthSize);
 
   return (
@@ -26,13 +28,14 @@ function Board() {
         temporaryShowWay={temporaryShowWay}
         restartBoard={restartBoard}
         success={success}
+        displayingWay={displayingWay}
       />
       <div className='board' style={{ gridTemplateColumns: `repeat(${widthSize}, 1fr)` }}>
         {board.flat(1).map((cell, idx) => (
           <Cell
             key={`cell-${idx}`}
             cellIndex={idx}
-            shouldLightUp={initialShowWay(cell) || isCellCorrect(idx)}
+            shouldLightUp={cellIndexTolightUp === idx || isCellCorrect(idx)}
             onClick={handelClickCell}
           />
         ))}

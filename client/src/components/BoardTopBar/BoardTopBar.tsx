@@ -6,18 +6,28 @@ function BoardTopBar({
   temporaryShowWay,
   restartBoard,
   success,
+  displayingWay,
 }: BoardTopBarComp) {
   return (
     <div className='board-top-bar'>
-      <div className='attempt-counter-container'>
-        <p>{`Attempt(s): ${attemptCount}`}</p>
-      </div>
+      <p>{`Attempt(s): ${attemptCount}`}</p>
       <div className='function-key-group'>
         <span
           onClick={() => temporaryShowWay()}
-          style={{ cursor: `${remainingShowWayCount && !success ? 'pointer' : 'not-allowed'}` }}
+          style={{
+            cursor: `${
+              remainingShowWayCount && !success && !displayingWay ? 'pointer' : 'not-allowed'
+            }`,
+          }}
         >{`SHOW WAY: ${remainingShowWayCount} Left`}</span>
-        <span onClick={() => restartBoard()}>RESTART</span>
+        <span
+          onClick={() => restartBoard()}
+          style={{
+            cursor: `${!displayingWay ? 'pointer' : 'not-allowed'}`,
+          }}
+        >
+          RESTART
+        </span>
       </div>
     </div>
   );

@@ -2,7 +2,12 @@ import { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
 import BoardService from '../../services/boardService';
 
 export const useBoard = (widthSize: number) => {
-  const [restartCount, restartBoard] = useReducer(x => x + 1, 0);
+  const [displayingWay, setDisplayingWay] = useState<boolean>(true);
+  const [restartCount, restartBoard] = useReducer(x => {
+    if (displayingWay) return x;
+
+    return x + 1;
+  }, 0);
 
   const boardService = useMemo(() => new BoardService(widthSize), [widthSize]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -15,6 +20,23 @@ export const useBoard = (widthSize: number) => {
   const [success, setSuccess] = useState<boolean>(false);
 
   const initialShowWay = useCallback((cell: number) => Boolean(cell) && showWay, [showWay]);
+  const [cellIndexTolightUp, setCellIndexTolightUp] = useState<number | null>(null);
+
+  useEffect(() => {
+    setDisplayingWay(true);
+
+    sequence.forEach((cellIdx, i) => {
+      setTimeout(() => {
+        console.log('cellIdx', cellIdx);
+        setCellIndexTolightUp(cellIdx);
+      }, 500 * i);
+    });
+
+    setTimeout(() => {
+      setCellIndexTolightUp(null);
+      setDisplayingWay(false);
+    }, 500 * sequence.length);
+  }, [sequence]);
 
   useEffect(() => {
     setShowWay(true);
@@ -36,7 +58,8 @@ export const useBoard = (widthSize: number) => {
     showWay ||
     success ||
     guessSequence.includes(idx) ||
-    (guessSequence.length === 0 && idx >= widthSize);
+    (guessSequence.length === 0 && idx >= widthSize) ||
+    displayingWay;
 
   const handelClickCell = (idx: number) => {
     if (shouldIgnoreCellClick(idx)) return;
@@ -68,7 +91,7 @@ export const useBoard = (widthSize: number) => {
   };
 
   const temporaryShowWay = () => {
-    if (showWay || remainingShowWayCount === 0 || success) return;
+    if (showWay || remainingShowWayCount === 0 || success || displayingWay) return;
 
     setShowWay(true);
     setRemainingShowWayCount(prev => --prev);
@@ -87,5 +110,7 @@ export const useBoard = (widthSize: number) => {
     handelClickCell,
     isCellCorrect,
     success,
+    cellIndexTolightUp,
+    displayingWay,
   };
 };

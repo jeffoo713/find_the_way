@@ -4,4 +4,5 @@ type BoardTopBarComp = {
   temporaryShowWay: () => void;
   restartBoard: React.DispatchWithoutAction;
   success: boolean;
+  displayingWay: boolean;
 };
