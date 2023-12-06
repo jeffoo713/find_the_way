@@ -13,7 +13,7 @@ function BoardTopBar({
       <p>{`Attempt(s): ${attemptCount}`}</p>
       <div className='function-key-group'>
         <span
-          onClick={() => temporaryShowWay()}
+          onClick={() => !displayingWay && temporaryShowWay()}
           style={{
             cursor: `${
               remainingShowWayCount && !success && !displayingWay ? 'pointer' : 'not-allowed'
@@ -21,9 +21,9 @@ function BoardTopBar({
           }}
         >{`SHOW WAY: ${remainingShowWayCount} Left`}</span>
         <span
-          onClick={() => restartBoard()}
+          onClick={() => !displayingWay && restartBoard()}
           style={{
-            cursor: `${!displayingWay ? 'pointer' : 'not-allowed'}`,
+            cursor: `${displayingWay ? 'not-allowed' : 'pointer'}`,
           }}
         >
           RESTART
