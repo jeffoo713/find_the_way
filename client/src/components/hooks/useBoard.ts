@@ -45,18 +45,16 @@ export const useBoard = (widthSize: number) => {
     setRemainingShowWayCount(2);
   }, [restartCount]);
 
-  const shouldIgnoreCellClick = (idx: number) =>
+  const _shouldIgnoreCellClick = (idx: number) =>
     success ||
     guessSequence.includes(idx) ||
     (guessSequence.length === 0 && idx >= widthSize) ||
     displayingWay;
 
   const handelClickCell = (idx: number) => {
-    if (shouldIgnoreCellClick(idx)) return;
+    if (_shouldIgnoreCellClick(idx)) return;
 
-    const numOfFoundCells = guessSequence.length;
-    const nextCellIdx = sequence.at(numOfFoundCells);
-    const correctGuess = nextCellIdx === idx;
+    const correctGuess = sequence.at(guessSequence.length) === idx;
 
     if (correctGuess) {
       setGuessSequence(prev => {
