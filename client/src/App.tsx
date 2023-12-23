@@ -1,11 +1,12 @@
-import './app.scss';
+import styles from './app.module.scss';
 import Board from './components/Board/Board';
+import LevelSelection from './components/LevelSelection/LevelSelection';
 
 function App() {
   return (
-    <div className='app'>
-      <h1>FIND THE WAY!</h1>
-      <Board />
+    <div className={styles.app}>
+      <LevelSelection />
+      {/* <Board /> */}
     </div>
   );
 }
