@@ -43,6 +43,10 @@ module.exports = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js', '.jsx'],
+    alias: {
+      '@/types': path.resolve(__dirname, 'src/types/'),
+      '@/enums': path.resolve(__dirname, 'src/enums/'),
+    },
   },
   plugins: [
     new webpack.DefinePlugin({

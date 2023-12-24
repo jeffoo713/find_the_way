@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useReducer, useState } from 'react';
-import BoardService from '../../services/boardService';
+import BoardService from '../services/boardService';
 
 export const useBoard = (widthSize: number) => {
   const [displayingWay, setDisplayingWay] = useState<boolean>(true);

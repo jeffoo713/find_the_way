@@ -1,6 +1,6 @@
 import Cell from '../Cell/Cell';
 import './board.style.scss';
-import { useBoard } from '../hooks/useBoard';
+import { useBoard } from '../../hooks/useBoard';
 import BoardTopBar from '../BoardTopBar/BoardTopBar';
 
 function Board() {

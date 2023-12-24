@@ -8,6 +8,11 @@
     "strict": true,
     "sourceMap": true,
     "target": "es5",
+    "baseUrl": "./", // This sets the base directory for your imports
+    "paths": {
+      "@/types/*": ["src/types/*"],
+      "@/enums/*": ["src/enums/*"]
+    }
   },
   "exclude": ["node_modules"]
 }
