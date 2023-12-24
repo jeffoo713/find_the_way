@@ -1,12 +1,19 @@
+import { useContext } from 'react';
 import Cell from '../Cell/Cell';
 import './board.style.scss';
 import { useBoard } from '../../hooks/useBoard';
 import BoardTopBar from '../BoardTopBar/BoardTopBar';
+import { GlobalContext } from '../../stateManagement/globalContext';
 
 function Board() {
-  const widthSize = 6;
+  const {
+    state: {
+      gameConfig: { gameLevel },
+    },
+  } = useContext(GlobalContext);
 
   const {
+    widthSize,
     board,
     temporaryShowWay,
     remainingShowWayCount,
@@ -17,7 +24,7 @@ function Board() {
     success,
     cellIndexTolightUp,
     displayingWay,
-  } = useBoard(widthSize);
+  } = useBoard(gameLevel);
 
   return (
     <div>

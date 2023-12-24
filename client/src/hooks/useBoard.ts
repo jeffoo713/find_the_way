@@ -1,7 +1,23 @@
 import { useEffect, useMemo, useReducer, useState } from 'react';
 import BoardService from '../services/boardService';
+import { GameLevel } from '@/enums/gameConfig';
 
-export const useBoard = (widthSize: number) => {
+export const useBoard = (gameLevel: GameLevel) => {
+  const widthSize = useMemo(() => {
+    switch (gameLevel) {
+      case GameLevel.EASY:
+        return 5;
+      case GameLevel.MODERATE:
+        return 6;
+      case GameLevel.HARD:
+        return 7;
+      case GameLevel.SUPER_HARD:
+        return 8;
+      default:
+        return 6;
+    }
+  }, [gameLevel]);
+
   const [displayingWay, setDisplayingWay] = useState<boolean>(true);
   const [restartCount, restartBoard] = useReducer(x => {
     if (displayingWay) return x;
@@ -85,6 +101,7 @@ export const useBoard = (widthSize: number) => {
   };
 
   return {
+    widthSize,
     board,
     temporaryShowWay,
     remainingShowWayCount,
