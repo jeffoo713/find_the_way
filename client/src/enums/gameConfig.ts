@@ -1,9 +1,9 @@
 export enum GameLevel {
-  NULL = 'NULL',
-  EASY = 'EASY',
-  MODERATE = 'MODERATE',
-  HARD = 'HARD',
-  SUPER_HARD = 'SUPER_HARD',
+  NULL,
+  EASY,
+  MODERATE,
+  HARD,
+  SUPER_HARD,
 }
 
 export enum GameConfigActionType {
