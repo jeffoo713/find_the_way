@@ -25,18 +25,27 @@ export const useBoard = (gameLevel: GameLevel) => {
   useEffect(() => {
     setDisplayingWay(true);
 
+    const timers: NodeJS.Timeout[] = [];
+
     sequence.forEach((cellIdx, i) => {
       if (guessSequence.includes(cellIdx)) return;
 
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         setCellIndexTolightUp(cellIdx);
       }, 500 * (i - guessSequence.length));
+      timers.push(timer);
     });
 
-    setTimeout(() => {
+    const finalTimer = setTimeout(() => {
       setCellIndexTolightUp(-1);
       setDisplayingWay(false);
     }, 500 * (sequence.length - guessSequence.length));
+    timers.push(finalTimer);
+
+    return () => {
+      timers.forEach(clearTimeout);
+    };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sequence, remainingShowWayCount]);
 

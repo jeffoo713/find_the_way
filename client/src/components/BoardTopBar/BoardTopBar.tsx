@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import styles from './boardTopBar.module.scss';
 import { BoardContext } from '../../context/BoardContext/BoadContextProvider';
 import { GlobalContext } from '../../context/GlobalContext/GlobalContext';
-import { GameLevel } from '@/enums/gameConfig';
+import { GameConfigActionType, GameLevel } from '@/enums/gameConfig';
 import { GAME_LEVEL_NAME, GAME_LEVEL_STYLES } from '../../constants';
 
 function BoardTopBar() {
@@ -10,6 +10,7 @@ function BoardTopBar() {
     state: {
       gameConfig: { gameLevel },
     },
+    dispatch,
   } = useContext(GlobalContext);
   const {
     attemptCount,
@@ -20,9 +21,15 @@ function BoardTopBar() {
     displayingWay,
   } = useContext(BoardContext);
 
+  const redirectToLevelSelection = () =>
+    dispatch({
+      type: GameConfigActionType.SET_GAME_LEVEL,
+      payload: { gameLevel: GameLevel.NULL },
+    });
+
   return (
     <div className={styles.board_top_bar}>
-      <h1>FIND THE WAY!</h1>
+      <h1 onClick={redirectToLevelSelection}>FIND THE WAY!</h1>
       <div className={styles.board_info_banner}>
         <div className={styles.game_info_group}>
           {/* Is there a way not to assert gameLevel as Exclude<GameLevel, GameLevel.NULL> ? */}
