@@ -14,24 +14,27 @@ function BoardTopBar() {
 
   return (
     <div className='board-top-bar'>
-      <p>{`Attempt(s): ${attemptCount}`}</p>
-      <div className='function-key-group'>
-        <span
-          onClick={temporaryShowWay}
-          style={{
-            cursor: `${
-              remainingShowWayCount && !success && !displayingWay ? 'pointer' : 'not-allowed'
-            }`,
-          }}
-        >{`SHOW WAY: ${remainingShowWayCount} Left`}</span>
-        <span
-          onClick={restartBoard}
-          style={{
-            cursor: `${displayingWay ? 'not-allowed' : 'pointer'}`,
-          }}
-        >
-          RESTART
-        </span>
+      <h1>FIND THE WAY!</h1>
+      <div className='board-info-banner'>
+        <span>{`Attempt(s): ${attemptCount}`}</span>
+        <div className='function-key-group'>
+          <span
+            onClick={temporaryShowWay}
+            style={{
+              cursor: `${
+                remainingShowWayCount && !success && !displayingWay ? 'pointer' : 'not-allowed'
+              }`,
+            }}
+          >{`SHOW WAY: ${remainingShowWayCount} Left`}</span>
+          <span
+            onClick={restartBoard}
+            style={{
+              cursor: `${displayingWay ? 'not-allowed' : 'pointer'}`,
+            }}
+          >
+            RESTART
+          </span>
+        </div>
       </div>
     </div>
   );

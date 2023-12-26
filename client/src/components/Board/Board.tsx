@@ -18,13 +18,11 @@ function Board() {
 
   return (
     <BoardContextProvider {...boardState}>
-      <div>
-        <BoardTopBar />
-        <div className='board' style={{ gridTemplateColumns: `repeat(${widthSize}, 1fr)` }}>
-          {board.flat(1).map((_cell, cellIdx) => (
-            <Cell key={`cell-${cellIdx}`} cellIndex={cellIdx} />
-          ))}
-        </div>
+      <BoardTopBar />
+      <div className='board' style={{ gridTemplateColumns: `repeat(${widthSize}, 1fr)` }}>
+        {board.flat(1).map((_cell, cellIdx) => (
+          <Cell key={`cell-${cellIdx}`} cellIndex={cellIdx} />
+        ))}
       </div>
     </BoardContextProvider>
   );
