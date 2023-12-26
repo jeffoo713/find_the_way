@@ -1,0 +1,16 @@
+type BoardState = {
+  widthSize: number;
+  board: Board;
+  temporaryShowWay: () => void;
+  remainingShowWayCount: number;
+  attemptCount: number;
+  restartBoard: React.DispatchWithoutAction;
+  handelClickCell: (idx: number) => void;
+  success: boolean;
+  displayingWay: boolean;
+  shouldCellLightUp: (cellIdx: number) => boolean;
+};
+
+type NullableBoardState = {
+  [K in keyof BoardState]: BoardState[K] | null;
+};

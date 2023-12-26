@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import './boardTopBar.style.scss';
+import { BoardContext } from '../../Context/BoardContext/BoadContextProvider';
 
 function BoardTopBar({
   attemptCount,
@@ -8,6 +10,9 @@ function BoardTopBar({
   success,
   displayingWay,
 }: BoardTopBarComp) {
+  const boardState = useContext(BoardContext);
+  console.log(boardState);
+
   return (
     <div className='board-top-bar'>
       <p>{`Attempt(s): ${attemptCount}`}</p>

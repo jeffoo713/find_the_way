@@ -3,7 +3,8 @@ import Cell from '../Cell/Cell';
 import './board.style.scss';
 import { useBoard } from '../../hooks/useBoard';
 import BoardTopBar from '../BoardTopBar/BoardTopBar';
-import { GlobalContext } from '../../context/globalContext/globalContext';
+import { GlobalContext } from '../../Context/GlobalContext/GlobalContext';
+import BoardContextProvider from '../../Context/BoardContext/BoadContextProvider';
 
 function Board() {
   const {
@@ -12,40 +13,34 @@ function Board() {
     },
   } = useContext(GlobalContext);
 
-  const {
-    widthSize,
-    board,
-    temporaryShowWay,
-    remainingShowWayCount,
-    attemptCount,
-    restartBoard,
-    handelClickCell,
-    success,
-    displayingWay,
-    shouldCellLightUp,
-  } = useBoard(gameLevel);
+  const boardState = useBoard(gameLevel);
 
   return (
-    <div>
-      <BoardTopBar
-        attemptCount={attemptCount}
-        remainingShowWayCount={remainingShowWayCount}
-        temporaryShowWay={temporaryShowWay}
-        restartBoard={restartBoard}
-        success={success}
-        displayingWay={displayingWay}
-      />
-      <div className='board' style={{ gridTemplateColumns: `repeat(${widthSize}, 1fr)` }}>
-        {board.flat(1).map((_cell, cellIdx) => (
-          <Cell
-            key={`cell-${cellIdx}`}
-            cellIndex={cellIdx}
-            shouldLightUp={shouldCellLightUp(cellIdx)}
-            onClick={handelClickCell}
-          />
-        ))}
+    <BoardContextProvider {...boardState}>
+      <div>
+        <BoardTopBar
+          attemptCount={boardState.attemptCount}
+          remainingShowWayCount={boardState.remainingShowWayCount}
+          temporaryShowWay={boardState.temporaryShowWay}
+          restartBoard={boardState.restartBoard}
+          success={boardState.success}
+          displayingWay={boardState.displayingWay}
+        />
+        <div
+          className='board'
+          style={{ gridTemplateColumns: `repeat(${boardState.widthSize}, 1fr)` }}
+        >
+          {boardState.board.flat(1).map((_cell, cellIdx) => (
+            <Cell
+              key={`cell-${cellIdx}`}
+              cellIndex={cellIdx}
+              shouldLightUp={boardState.shouldCellLightUp(cellIdx)}
+              onClick={boardState.handelClickCell}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    </BoardContextProvider>
   );
 }
 

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import styles from './app.module.scss';
 import Board from './components/Board/Board';
 import LevelSelection from './components/LevelSelection/LevelSelection';
-import { GlobalContext } from './context/globalContext/globalContext';
+import { GlobalContext } from './Context/GlobalContext/GlobalContext';
 
 function App() {
   const {
