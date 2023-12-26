@@ -1,5 +1,5 @@
 import React, { useReducer } from 'react';
-import { INITIAL_GLOBAL_STATE, GlobalContext } from './lobalContext';
+import { INITIAL_GLOBAL_STATE, GlobalContext } from './GlobalContext';
 import { globalReducer } from './reducers/globalReducer';
 
 type GlobalProviderProps = {
