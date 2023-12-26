@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import styles from './boardTopBar.module.scss';
 import { BoardContext } from '../../context/BoardContext/BoadContextProvider';
-import { GlobalContext } from '../../context/GlobalContext/GlobalContext';
+import { GlobalContext } from '../../context/lobalContext/lobalContext';
 import { GameConfigActionType, GameLevel } from '@/enums/gameConfig';
 import { GAME_LEVEL_NAME, GAME_LEVEL_STYLES } from '../../constants';
 

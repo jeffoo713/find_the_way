@@ -3,7 +3,7 @@ import Cell from '../Cell/Cell';
 import './board.style.scss';
 import { useBoard } from '../../hooks/useBoard';
 import BoardTopBar from '../BoardTopBar/BoardTopBar';
-import { GlobalContext } from '../../context/GlobalContext/GlobalContext';
+import { GlobalContext } from '../../context/lobalContext/lobalContext';
 import BoardContextProvider from '../../context/BoardContext/BoadContextProvider';
 
 function Board() {

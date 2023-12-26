@@ -1,5 +1,5 @@
 import { GameLevel } from '@/enums/gameConfig';
-import { GlobalActionType, GlobalState } from '@/types/context/GlobalContext/GlobalContext';
+import { GlobalActionType, GlobalState } from '@/types/ontext/GlobalContext/GlobalContext';
 import React, { createContext } from 'react';
 
 export const INITIAL_GLOBAL_STATE: GlobalState = {
