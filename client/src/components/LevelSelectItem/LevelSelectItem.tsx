@@ -1,6 +1,6 @@
 import { useContext, useMemo } from 'react';
 import styles from './levelSelectItem.module.scss';
-import { GlobalContext } from '../../stateManagement/globalContext';
+import { GlobalContext } from '../../context/globalContext/globalContext';
 import { GameConfigActionType, GameLevel } from '@/enums/gameConfig';
 
 type LevelSelectItemProps = {
