@@ -1,23 +1,23 @@
 import { createContext } from 'react';
 
 const INITIAL_CONTEXT_VALUE = {
-  widthSize: null,
-  board: null,
-  temporaryShowWay: null,
-  remainingShowWayCount: null,
-  attemptCount: null,
-  restartBoard: null,
-  handelClickCell: null,
-  success: null,
-  displayingWay: null,
-  shouldCellLightUp: null,
+  widthSize: 0,
+  board: [],
+  temporaryShowWay: () => {},
+  remainingShowWayCount: 0,
+  attemptCount: 0,
+  restartBoard: () => {},
+  handelClickCell: () => {},
+  success: false,
+  displayingWay: false,
+  shouldCellLightUp: () => false,
 };
 
-export const BoardContext = createContext<NullableBoardState>(INITIAL_CONTEXT_VALUE);
+export const BoardContext = createContext<BoardState>(INITIAL_CONTEXT_VALUE);
 
 type BoardContextProviderProps = {
   children: React.ReactNode;
-} & NullableBoardState;
+} & BoardState;
 
 function BoardContextProvider(props: BoardContextProviderProps) {
   return <BoardContext.Provider value={props}>{props.children}</BoardContext.Provider>;

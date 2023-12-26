@@ -1,4 +1,4 @@
-import { GlobalActionType, GlobalState } from '@/types/Context/GlobalContext/GlobalContext';
+import { GlobalActionType, GlobalState } from '@/types/context/GlobalContext/GlobalContext';
 import { gameConfigReducer } from './gameConfig/gameConfigReducer';
 
 export const globalReducer = (state: GlobalState, action: GlobalActionType): GlobalState => ({

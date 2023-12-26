@@ -1,6 +1,6 @@
 import { GameLevel, GameConfigActionType as GameConfigActionTypeEnum } from '@/enums/gameConfig';
-import { GameConfigActionType } from '@/types/Context/GlobalContext/gameConfig/gameConfigReducer';
-import { GameConfigState } from '@/types/Context/GlobalContext/gameConfig/gameConfigReducer';
+import { GameConfigActionType } from '@/types/context/GlobalContext/gameConfig/gameConfigReducer';
+import { GameConfigState } from '@/types/context/GlobalContext/gameConfig/gameConfigReducer';
 
 const INITIAL_GAME_CONFIG_STATE: GameConfigState = {
   gameLevel: GameLevel.NULL,

@@ -3,8 +3,8 @@ import Cell from '../Cell/Cell';
 import './board.style.scss';
 import { useBoard } from '../../hooks/useBoard';
 import BoardTopBar from '../BoardTopBar/BoardTopBar';
-import { GlobalContext } from '../../Context/GlobalContext/GlobalContext';
-import BoardContextProvider from '../../Context/BoardContext/BoadContextProvider';
+import { GlobalContext } from '../../context/GlobalContext/GlobalContext';
+import BoardContextProvider from '../../context/BoardContext/BoadContextProvider';
 
 function Board() {
   const {
@@ -14,29 +14,15 @@ function Board() {
   } = useContext(GlobalContext);
 
   const boardState = useBoard(gameLevel);
+  const { widthSize, board } = boardState;
 
   return (
     <BoardContextProvider {...boardState}>
       <div>
-        <BoardTopBar
-          attemptCount={boardState.attemptCount}
-          remainingShowWayCount={boardState.remainingShowWayCount}
-          temporaryShowWay={boardState.temporaryShowWay}
-          restartBoard={boardState.restartBoard}
-          success={boardState.success}
-          displayingWay={boardState.displayingWay}
-        />
-        <div
-          className='board'
-          style={{ gridTemplateColumns: `repeat(${boardState.widthSize}, 1fr)` }}
-        >
-          {boardState.board.flat(1).map((_cell, cellIdx) => (
-            <Cell
-              key={`cell-${cellIdx}`}
-              cellIndex={cellIdx}
-              shouldLightUp={boardState.shouldCellLightUp(cellIdx)}
-              onClick={boardState.handelClickCell}
-            />
+        <BoardTopBar />
+        <div className='board' style={{ gridTemplateColumns: `repeat(${widthSize}, 1fr)` }}>
+          {board.flat(1).map((_cell, cellIdx) => (
+            <Cell key={`cell-${cellIdx}`} cellIndex={cellIdx} />
           ))}
         </div>
       </div>

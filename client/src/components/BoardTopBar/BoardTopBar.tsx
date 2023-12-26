@@ -1,24 +1,23 @@
 import { useContext } from 'react';
 import './boardTopBar.style.scss';
-import { BoardContext } from '../../Context/BoardContext/BoadContextProvider';
+import { BoardContext } from '../../context/BoardContext/BoadContextProvider';
 
-function BoardTopBar({
-  attemptCount,
-  remainingShowWayCount,
-  temporaryShowWay,
-  restartBoard,
-  success,
-  displayingWay,
-}: BoardTopBarComp) {
-  const boardState = useContext(BoardContext);
-  console.log(boardState);
+function BoardTopBar() {
+  const {
+    attemptCount,
+    remainingShowWayCount,
+    temporaryShowWay,
+    restartBoard,
+    success,
+    displayingWay,
+  } = useContext(BoardContext);
 
   return (
     <div className='board-top-bar'>
       <p>{`Attempt(s): ${attemptCount}`}</p>
       <div className='function-key-group'>
         <span
-          onClick={() => !displayingWay && temporaryShowWay()}
+          onClick={temporaryShowWay}
           style={{
             cursor: `${
               remainingShowWayCount && !success && !displayingWay ? 'pointer' : 'not-allowed'
@@ -26,7 +25,7 @@ function BoardTopBar({
           }}
         >{`SHOW WAY: ${remainingShowWayCount} Left`}</span>
         <span
-          onClick={() => !displayingWay && restartBoard()}
+          onClick={restartBoard}
           style={{
             cursor: `${displayingWay ? 'not-allowed' : 'pointer'}`,
           }}

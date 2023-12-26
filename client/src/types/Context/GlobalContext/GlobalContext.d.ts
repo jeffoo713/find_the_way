@@ -1,4 +1,4 @@
-import { GameConfigActionType } from '@/types/Context/GlobalContext/gameConfig/gameConfigReducer';
+import { GameConfigActionType } from '@/types/context/GlobalContext/gameConfig/gameConfigReducer';
 import { GameConfigState } from './gameConfig/gameConfigReducer';
 
 type GlobalState = {
