@@ -3,7 +3,7 @@ import Cell from '../Cell/Cell';
 import './board.style.scss';
 import { useBoard } from '../../hooks/useBoard';
 import BoardTopBar from '../BoardTopBar/BoardTopBar';
-import { GlobalContext } from '../../stateManagement/globalContext';
+import { GlobalContext } from '../../context/globalContext/globalContext';
 
 function Board() {
   const {
@@ -20,10 +20,9 @@ function Board() {
     attemptCount,
     restartBoard,
     handelClickCell,
-    isCellCorrect,
     success,
-    cellIndexTolightUp,
     displayingWay,
+    shouldCellLightUp,
   } = useBoard(gameLevel);
 
   return (
@@ -37,11 +36,11 @@ function Board() {
         displayingWay={displayingWay}
       />
       <div className='board' style={{ gridTemplateColumns: `repeat(${widthSize}, 1fr)` }}>
-        {board.flat(1).map((cell, idx) => (
+        {board.flat(1).map((_cell, cellIdx) => (
           <Cell
-            key={`cell-${idx}`}
-            cellIndex={idx}
-            shouldLightUp={cellIndexTolightUp === idx || isCellCorrect(idx)}
+            key={`cell-${cellIdx}`}
+            cellIndex={cellIdx}
+            shouldLightUp={shouldCellLightUp(cellIdx)}
             onClick={handelClickCell}
           />
         ))}

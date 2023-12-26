@@ -64,6 +64,7 @@ export const useBoard = (gameLevel: GameLevel) => {
 
         if (updated.length === sequence.length) {
           setSuccess(true);
+          setGuessSequence([]);
           console.log('YOU FOUND THE WAY!!');
         }
 
@@ -76,7 +77,7 @@ export const useBoard = (gameLevel: GameLevel) => {
     }
   };
 
-  const isCellCorrect = (idx: number) => {
+  const _isCellCorrect = (idx: number) => {
     return guessSequence.includes(idx);
   };
 
@@ -86,6 +87,11 @@ export const useBoard = (gameLevel: GameLevel) => {
     setRemainingShowWayCount(prev => --prev);
   };
 
+  const _showWayWhenSuccess = (cellIdx: number) => success && sequence.includes(cellIdx);
+
+  const shouldCellLightUp = (cellIdx: number) =>
+    cellIndexTolightUp === cellIdx || _isCellCorrect(cellIdx) || _showWayWhenSuccess(cellIdx);
+
   return {
     widthSize,
     board,
@@ -94,9 +100,9 @@ export const useBoard = (gameLevel: GameLevel) => {
     attemptCount,
     restartBoard,
     handelClickCell,
-    isCellCorrect,
     success,
     cellIndexTolightUp,
     displayingWay,
+    shouldCellLightUp,
   };
 };
