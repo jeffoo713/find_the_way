@@ -1,8 +1,16 @@
 import { useContext } from 'react';
-import './boardTopBar.style.scss';
+import styles from './boardTopBar.module.scss';
 import { BoardContext } from '../../context/BoardContext/BoadContextProvider';
+import { GlobalContext } from '../../context/GlobalContext/GlobalContext';
+import { GameLevel } from '@/enums/gameConfig';
+import { GAME_LEVEL_NAME, GAME_LEVEL_STYLES } from '../../constants';
 
 function BoardTopBar() {
+  const {
+    state: {
+      gameConfig: { gameLevel },
+    },
+  } = useContext(GlobalContext);
   const {
     attemptCount,
     remainingShowWayCount,
@@ -13,11 +21,19 @@ function BoardTopBar() {
   } = useContext(BoardContext);
 
   return (
-    <div className='board-top-bar'>
+    <div className={styles.board_top_bar}>
       <h1>FIND THE WAY!</h1>
-      <div className='board-info-banner'>
-        <span>{`Attempt(s): ${attemptCount}`}</span>
-        <div className='function-key-group'>
+      <div className={styles.board_info_banner}>
+        <div className={styles.game_info_group}>
+          {/* Is there a way not to assert gameLevel as Exclude<GameLevel, GameLevel.NULL> ? */}
+          <span
+            className={GAME_LEVEL_STYLES(styles)[gameLevel as Exclude<GameLevel, GameLevel.NULL>]}
+          >
+            {GAME_LEVEL_NAME[gameLevel as Exclude<GameLevel, GameLevel.NULL>]}
+          </span>
+          <span>{`Attempt(s): ${attemptCount}`}</span>
+        </div>
+        <div className={styles.function_key_group}>
           <span
             onClick={temporaryShowWay}
             style={{
@@ -25,7 +41,7 @@ function BoardTopBar() {
                 remainingShowWayCount && !success && !displayingWay ? 'pointer' : 'not-allowed'
               }`,
             }}
-          >{`SHOW WAY: ${remainingShowWayCount} Left`}</span>
+          >{`Hint (${remainingShowWayCount} Left)`}</span>
           <span
             onClick={restartBoard}
             style={{

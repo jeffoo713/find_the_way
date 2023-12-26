@@ -1,0 +1,70 @@
+@import '../../assets/variables';
+
+.board_top_bar {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  max-width: 800px;
+  margin: 2rem auto 0;
+
+  & > h1 {
+    text-align: center;
+  }
+
+  .board_info_banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    font-weight: 600;
+    padding: 0 0.2rem;
+
+    .game_info_group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      & > span {
+        width: 100%;
+        text-align: center;
+        padding: 0.3rem;
+      }
+
+      & > span:first-child {
+        border-radius: 0.5rem;
+        color: #eee;
+      }
+
+      .level_easy {
+        background-color: $easy_color;
+      }
+      .level_moderate {
+        background-color: $moderate_color;
+      }
+      .level_hard {
+        background-color: $hard_color;
+      }
+      .level_super_hard {
+        background-color: $super_hard_color;
+      }
+    }
+
+    .function_key_group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      & > span {
+        width: 100%;
+        text-align: center;
+        cursor: pointer;
+        padding: 0.3rem;
+
+        &:hover {
+          background-color: rgba(247, 236, 221, 0.7);
+          border-radius: 0.5rem;
+          transition: 0.7s;
+        }
+      }
+    }
+  }
+}
