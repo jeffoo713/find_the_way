@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react';
+import { useContext } from 'react';
 import './cell.style.scss';
 import { BoardContext } from '../../context/BoardContext/BoadContextProvider';
 
@@ -7,16 +7,13 @@ type CellComp = {
 };
 
 function Cell({ cellIndex }: CellComp) {
-  const { shouldCellLightUp, handelClickCell } = useContext(BoardContext);
-
-  const shouldLightUp = useMemo(() => shouldCellLightUp(cellIndex), [cellIndex, shouldCellLightUp]);
+  const { shouldCellLightUp, handelClickCell, isWrongCell } = useContext(BoardContext);
 
   return (
     <div
-      className='cell'
-      style={{
-        backgroundColor: `${shouldLightUp ? 'green' : 'unset'}`,
-      }}
+      className={`cell ${shouldCellLightUp(cellIndex) && 'correct_cell'} ${
+        isWrongCell(cellIndex) && 'wrong_cell'
+      }`}
       onClick={() => handelClickCell(cellIndex)}
     />
   );

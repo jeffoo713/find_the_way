@@ -11,6 +11,7 @@ const INITIAL_CONTEXT_VALUE = {
   success: false,
   displayingWay: false,
   shouldCellLightUp: () => false,
+  isWrongCell: () => false,
 };
 
 export const BoardContext = createContext<BoardState>(INITIAL_CONTEXT_VALUE);

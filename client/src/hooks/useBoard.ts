@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useReducer, useState } from 'react';
+import { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
 import BoardService from '../services/boardService';
 import { GameLevel } from '@/enums/gameConfig';
 
@@ -18,6 +18,7 @@ export const useBoard = (gameLevel: GameLevel) => {
   const [remainingShowWayCount, setRemainingShowWayCount] = useState<number>(2);
   const [attemptCount, setAttemptCount] = useState<number>(1);
   const [guessSequence, setGuessSequence] = useState<number[]>([]);
+  const [wrongCellIndex, setWrongCellIndex] = useState<number>(-1);
   const [success, setSuccess] = useState<boolean>(false);
 
   const [cellIndexTolightUp, setCellIndexTolightUp] = useState<number>(-1);
@@ -60,7 +61,8 @@ export const useBoard = (gameLevel: GameLevel) => {
     success ||
     guessSequence.includes(idx) ||
     (guessSequence.length === 0 && idx >= widthSize) ||
-    displayingWay;
+    displayingWay ||
+    wrongCellIndex !== -1;
 
   const handelClickCell = (idx: number) => {
     if (_shouldIgnoreCellClick(idx)) return;
@@ -80,15 +82,22 @@ export const useBoard = (gameLevel: GameLevel) => {
         return updated;
       });
     } else {
-      setGuessSequence([]);
-      setAttemptCount(prev => ++prev);
-      console.log('WRONG WAY!!');
+      setWrongCellIndex(idx);
+
+      setTimeout(() => {
+        setWrongCellIndex(-1);
+        setGuessSequence([]);
+        setAttemptCount(prev => ++prev);
+      }, 500);
     }
   };
 
-  const _isCellCorrect = (idx: number) => {
-    return guessSequence.includes(idx);
-  };
+  const _isCellCorrect = useCallback(
+    (idx: number) => {
+      return guessSequence.includes(idx);
+    },
+    [guessSequence],
+  );
 
   const temporaryShowWay = () => {
     if (remainingShowWayCount === 0 || success || displayingWay) return;
@@ -96,10 +105,21 @@ export const useBoard = (gameLevel: GameLevel) => {
     setRemainingShowWayCount(prev => --prev);
   };
 
-  const _showWayWhenSuccess = (cellIdx: number) => success && sequence.includes(cellIdx);
+  const _showWayWhenSuccess = useCallback(
+    (cellIdx: number) => success && sequence.includes(cellIdx),
+    [success, sequence],
+  );
 
-  const shouldCellLightUp = (cellIdx: number) =>
-    cellIndexTolightUp === cellIdx || _isCellCorrect(cellIdx) || _showWayWhenSuccess(cellIdx);
+  const shouldCellLightUp = useCallback(
+    (cellIdx: number) =>
+      cellIndexTolightUp === cellIdx || _isCellCorrect(cellIdx) || _showWayWhenSuccess(cellIdx),
+    [cellIndexTolightUp, _isCellCorrect, _showWayWhenSuccess],
+  );
+
+  const isWrongCell = useCallback(
+    (cellIdx: number) => wrongCellIndex === cellIdx,
+    [wrongCellIndex],
+  );
 
   return {
     widthSize,
@@ -113,5 +133,6 @@ export const useBoard = (gameLevel: GameLevel) => {
     cellIndexTolightUp,
     displayingWay,
     shouldCellLightUp,
+    isWrongCell,
   };
 };
