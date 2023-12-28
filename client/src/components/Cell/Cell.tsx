@@ -16,7 +16,11 @@ function Cell({ cellIndex }: CellComp) {
       className={`cell ${shouldCellLightUp(cellIndex) && 'correct_cell'} ${
         isWrongCell(cellIndex) && 'wrong_cell'
       } ${
-        isHovering && !shouldCellLightUp(cellIndex) && !isWrongCell(cellIndex) && 'cell_hovered'
+        isHovering &&
+        !success &&
+        !shouldCellLightUp(cellIndex) &&
+        !isWrongCell(cellIndex) &&
+        'cell_hovered'
       }`}
       onClick={() => handelClickCell(cellIndex)}
       onMouseEnter={() => setIsHovering(true)}
