@@ -27,17 +27,16 @@ function BoardTopBar() {
       payload: { gameLevel: GameLevel.NULL },
     });
 
+  // In reality, gameLevel would never be null when this component is rendered.
+  // This is just to avoid type error for GAME_LEVEL_STYLES, GAME_LEVEL_NAME
+  if (gameLevel === GameLevel.NULL) return null;
+
   return (
     <div className={styles.board_top_bar}>
       <h1 onClick={redirectToLevelSelection}>FIND THE WAY!</h1>
       <div className={styles.board_info_banner}>
         <div className={styles.game_info_group}>
-          {/* Is there a way not to assert gameLevel as Exclude<GameLevel, GameLevel.NULL> ? */}
-          <span
-            className={GAME_LEVEL_STYLES(styles)[gameLevel as Exclude<GameLevel, GameLevel.NULL>]}
-          >
-            {GAME_LEVEL_NAME[gameLevel as Exclude<GameLevel, GameLevel.NULL>]}
-          </span>
+          <span className={GAME_LEVEL_STYLES(styles)[gameLevel]}>{GAME_LEVEL_NAME[gameLevel]}</span>
           <span>{`Attempt(s): ${attemptCount}`}</span>
         </div>
         <div className={styles.function_key_group}>

@@ -10,7 +10,3 @@ type BoardState = {
   displayingWay: boolean;
   shouldCellLightUp: (cellIdx: number) => boolean;
 };
-
-type NullableBoardState = {
-  [K in keyof BoardState]: BoardState[K] | null;
-};
