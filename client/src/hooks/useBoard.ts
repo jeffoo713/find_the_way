@@ -75,19 +75,18 @@ export const useBoard = (gameLevel: GameLevel) => {
 
         if (updated.length === sequence.length) {
           setSuccess(true);
-          setGuessSequence([]);
-          console.log('YOU FOUND THE WAY!!');
+          return [];
         }
 
         return updated;
       });
     } else {
       setWrongCellIndex(idx);
+      setAttemptCount(prev => ++prev);
 
       setTimeout(() => {
         setWrongCellIndex(-1);
         setGuessSequence([]);
-        setAttemptCount(prev => ++prev);
       }, 500);
     }
   };
