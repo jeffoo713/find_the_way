@@ -7,7 +7,7 @@ type CellComp = {
 };
 
 function Cell({ cellIndex }: CellComp) {
-  const { shouldCellLightUp, handelClickCell, isWrongCell } = useContext(BoardContext);
+  const { shouldCellLightUp, handelClickCell, isWrongCell, success } = useContext(BoardContext);
 
   const [isHovering, setIsHovering] = useState(false);
 
