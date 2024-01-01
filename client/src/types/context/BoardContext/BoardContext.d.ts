@@ -10,4 +10,5 @@ type BoardState = {
   displayingWay: boolean;
   shouldCellLightUp: (cellIdx: number) => boolean;
   isWrongCell: (cellIdx: number) => boolean;
+  showFinishFlag: (cellIdx: number) => boolean;
 };

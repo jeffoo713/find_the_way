@@ -57,7 +57,7 @@ function BoardTopBar() {
             RESTART
           </span>
           <div className={`${styles.success_message} ${success && styles.show_success_message}`}>
-            <p>Congratulation, you found the way! 🎉</p>
+            <p>Nice! You found the way! 🎉</p>
             <p>Click to restart!</p>
           </div>
         </div>

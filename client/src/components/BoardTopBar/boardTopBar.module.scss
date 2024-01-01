@@ -4,8 +4,8 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  max-width: 800px;
-  margin: 2rem auto 0;
+  max-width: 700px;
+  margin: 0.5rem auto 0;
 
   & > h1 {
     text-align: center;
@@ -53,7 +53,7 @@
       display: flex;
       flex-direction: column;
       align-items: flex-end;
-      width: 50%;
+      flex-grow: 1;
       position: relative;
 
       & > span {
@@ -72,9 +72,9 @@
       .success_message {
         width: fit-content;
         position: absolute;
-        bottom: -6rem;
+        bottom: -5rem;
         background-color: rgb(255, 255, 255, 0.9);
-        padding: 1rem 2rem;
+        padding: 1rem 1.5rem;
         text-align: center;
         border-radius: 1rem;
         display: none;

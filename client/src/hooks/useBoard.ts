@@ -120,6 +120,11 @@ export const useBoard = (gameLevel: GameLevel) => {
     [wrongCellIndex],
   );
 
+  const showFinishFlag = useCallback(
+    (cellIdx: number) => success && sequence.at(-1) === cellIdx,
+    [success, sequence],
+  );
+
   return {
     widthSize,
     board,
@@ -133,5 +138,6 @@ export const useBoard = (gameLevel: GameLevel) => {
     displayingWay,
     shouldCellLightUp,
     isWrongCell,
+    showFinishFlag,
   };
 };

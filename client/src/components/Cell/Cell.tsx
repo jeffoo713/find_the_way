@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import './cell.style.scss';
+import styles from './cell.module.scss';
 import { BoardContext } from '../../context/BoardContext/BoadContextProvider';
 
 type CellComp = {
@@ -7,25 +7,28 @@ type CellComp = {
 };
 
 function Cell({ cellIndex }: CellComp) {
-  const { shouldCellLightUp, handelClickCell, isWrongCell, success } = useContext(BoardContext);
+  const { shouldCellLightUp, handelClickCell, isWrongCell, success, showFinishFlag } =
+    useContext(BoardContext);
 
   const [isHovering, setIsHovering] = useState(false);
 
   return (
     <div
-      className={`cell ${shouldCellLightUp(cellIndex) && 'correct_cell'} ${
-        isWrongCell(cellIndex) && 'wrong_cell'
+      className={`${styles.cell} ${shouldCellLightUp(cellIndex) && styles.correct_cell} ${
+        isWrongCell(cellIndex) && styles.wrong_cell
       } ${
         isHovering &&
         !success &&
         !shouldCellLightUp(cellIndex) &&
         !isWrongCell(cellIndex) &&
-        'cell_hovered'
+        styles.cell_hovered
       }`}
       onClick={() => handelClickCell(cellIndex)}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
-    />
+    >
+      <span className={`${showFinishFlag(cellIndex) && styles.last_cell}`}>FINISH</span>
+    </div>
   );
 }
 

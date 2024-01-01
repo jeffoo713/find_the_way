@@ -1,0 +1,39 @@
+@import '../../assets/variables';
+@import '../../assets/animations';
+
+.cell {
+  aspect-ratio: 1/1;
+  border: 1px solid black;
+  margin: 0.1rem;
+  cursor: pointer;
+  border-radius: 0.1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > span {
+    display: none;
+  }
+
+  .last_cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #fff;
+  }
+}
+
+.cell_hovered {
+  background-color: rgba(255, 255, 255, 0.4);
+  animation: zoom-in-out 1s;
+}
+
+.correct_cell {
+  background-color: $correct_cell_color;
+}
+
+.wrong_cell {
+  background-color: $wrong_cell_color;
+  animation: shake 0.5s;
+}

@@ -1,25 +1,3 @@
-@import '../../assets/variables';
-
-.cell {
-  aspect-ratio: 1/1;
-  border: 1px solid black;
-  margin: 0.2rem;
-  cursor: pointer;
-}
-
-.cell_hovered {
-  background-color: rgba(255, 255, 255, 0.4);
-  animation: zoom-in-out 1s;
-}
-
-.correct_cell {
-  background-color: $correct_cell_color;
-}
-
-.wrong_cell {
-  background-color: $wrong_cell_color;
-  animation: shake 0.5s;
-}
 
 @keyframes shake {
   0% {
@@ -62,7 +40,7 @@
     transform: scale(1);
   }
   50% {
-    transform: scale(1.015);
+    transform: scale(1.02);
   }
   100% {
     transform: scale(1);
