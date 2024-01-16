@@ -63,7 +63,7 @@ class BoardService {
     let prevLastCellIndex: number;
     let prevTurnLeft: boolean | null;
 
-    emptyBoard.forEach((row, i) => {
+    emptyBoard.forEach((_row, i) => {
       if (i === 0) {
         const startCellIndex = this.getStartCellIndex();
         prevLastCellIndex = startCellIndex;
@@ -111,8 +111,10 @@ class BoardService {
       return;
     });
 
-    console.log('sequence: ', sequence);
+    // Enable this to see the sequence while developing/debugging
+    // console.log('sequence: ', sequence);
 
+    // Making it harder but I just commented it out for now
     // if (sequence.length < 15) return this.createBoard();
 
     return [boardToStart, sequence];
