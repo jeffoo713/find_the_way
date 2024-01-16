@@ -29,6 +29,8 @@ export const useBoardResizeStyle = () => {
   };
 
   useEffect(() => {
+    resizeListener(); // initial resize
+
     addEventListener('resize', resizeListener);
 
     return () => {
