@@ -1,0 +1,18 @@
+.board_wrapper {
+  .board {
+    display: grid;
+    width: 100%;
+    max-width: 700px;
+    margin: 0rem auto;
+    aspect-ratio: '1 / 1';
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .board_wrapper {
+    margin-top: 2rem;
+    .board {
+      margin-top: 2rem;
+    }
+  }
+}

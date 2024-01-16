@@ -10,6 +10,7 @@
   & > h1 {
     text-align: center;
     cursor: pointer;
+    font-size: calc(1rem + 1vw);
   }
 
   .board_info_banner {
@@ -95,6 +96,26 @@
 
       .show_success_message {
         display: block;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .board_top_bar {
+    font-size: 0.7rem;
+
+    .board_info_banner {
+      .game_info_group {
+        & > span {
+          padding: 0.1rem;
+        }
+      }
+      .function_key_group {
+        & > span {
+          width: 80px;
+          padding: 0.1rem;
+        }
       }
     }
   }
