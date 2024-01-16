@@ -1,12 +1,12 @@
 import { GameLevel, GameConfigActionType as GameConfigActionTypeEnum } from '@/enums/gameConfig';
 
-type GameConfigState = {
+export type GameConfigState = {
   gameLevel: GameLevel;
 };
 
-type GameConfigActionTypePayload = Partial<GameConfigState>;
+export type GameConfigActionTypePayload = Partial<GameConfigState>;
 
-type GameConfigActionType = {
+export type GameConfigActionType = {
   type: GameConfigActionTypeEnum;
   payload: GameConfigActionTypePayload;
 };

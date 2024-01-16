@@ -1,3 +1,5 @@
+import { Board, BoardRow } from '@/types/services/BoardService';
+
 class BoardService {
   private widthSize: number;
 

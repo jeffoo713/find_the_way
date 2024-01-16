@@ -1,4 +1,5 @@
 import { createContext } from 'react';
+import { BoardState } from '@/types/context/BoardContext/BoardContext';
 
 const INITIAL_CONTEXT_VALUE = {
   widthSize: 0,

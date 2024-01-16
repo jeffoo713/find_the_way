@@ -1,4 +1,6 @@
-type BoardState = {
+import { Board } from '@/types/services/BoardService';
+
+export type BoardState = {
   widthSize: number;
   board: Board;
   temporaryShowWay: () => void;
