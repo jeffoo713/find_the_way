@@ -37,3 +37,43 @@
   background-color: $wrong_cell_color;
   animation: shake 0.5s;
 }
+
+@media screen and (max-width: 640px) {
+  .cell {
+    .last_cell {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .cell {
+    .last_cell {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .cell {
+    .last_cell {
+      font-size: 1.1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .cell {
+    .last_cell {
+      font-size: 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .cell {
+    .last_cell {
+      font-size: 0.9rem;
+    }
+  }
+}
