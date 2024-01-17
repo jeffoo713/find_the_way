@@ -14,11 +14,11 @@
 
 ## Preview
 
-![sameple-gif](https://github.com/jeffoo713/find_the_way/blob/master/client/sampel-video/play.gif)
+![sameple-gif](https://github.com/jeffoo713/find_the_way/blob/master/client/sample-video/play.gif)
 
-![sameple-mobile](https://github.com/jeffoo713/find_the_way/blob/master/client/sampel-images/mobile.png)
+![sameple-mobile](https://github.com/jeffoo713/find_the_way/blob/master/client/sample-images/mobile.png)
 
-![sameple-web1](https://github.com/jeffoo713/find_the_way/blob/master/client/sampel-images/level-selection-web.png)
+![sameple-web1](https://github.com/jeffoo713/find_the_way/blob/master/client/sample-images/level-selection-web.png)
 
 ![sameple-web2](https://github.com/jeffoo713/find_the_way/blob/master/client/sample-images/complete-web.png)
 
