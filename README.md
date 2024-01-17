@@ -31,7 +31,7 @@
 
 ## Run the project
 
-1. Navigate into core dir
+1. Navigate into core directory
 
 ```sh
 $ cd core
@@ -43,7 +43,7 @@ $ cd core
 $ docker-compose build
 ```
 
-3. Create container and run
+3. Create and run container 
 
 ```sh
 $ docker-compose -p find_the_way up -d
